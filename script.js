@@ -1,14 +1,5 @@
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-57622-11']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-})();
-
-var template = 'Cvccvc99';
+//var template = 'Cvccvc99';
+var template = 'aCcVvCc99##99A'; // 14 Char Password
 
 function generatePasswords(template, number) {
     var chars = {}
@@ -19,7 +10,8 @@ function generatePasswords(template, number) {
     chars['c'] = 'bcdfghjklmnprstvwxz';
     chars['C'] = chars['c'].toUpperCase();
     chars['9'] = '0123456789';
-    chars['#'] = '!@#$%^&*_-+=()[]{}';
+    //chars['#'] = '!@#$%^&*_-+=()[]{} ';
+    chars['#'] = '@#_- .!/'; //Tweaking Specials to be a bit less unfun for systems
     chars['a'] = chars['l'] + chars['9'];
     chars['A'] = chars['a'].toUpperCase();
 
