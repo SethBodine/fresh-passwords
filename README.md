@@ -3,7 +3,7 @@
 
 Just an updated version of passwds.ninja for use when you need a password quickly and without fuss.
 
-Nothing fancy - just a website for passwords at [passgen.insecure.co.nz](https://passgen.insecure.co.nz)
+Nothing fancy - just a website for passwords at [pass.insecure.co.nz](https://pass.insecure.co.nz)
 
 ## Tweaks to configuration
 Password Length and complexity tweaked to accomodate newer password lengths 
