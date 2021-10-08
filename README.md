@@ -34,10 +34,12 @@ Allow for the following arguments to be supplied
 ##### Example 1.
 
 f=Cvccvc99
+
 example password: "Hatjan77"
 
 ##### Example 2.
 f=aCcVvCc99##99A
+
 example password: "hBwUeZh00@ 46T"
 
 These are ignored if invalid or if the password format is shorter than 12 chars
