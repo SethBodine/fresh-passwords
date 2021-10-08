@@ -27,7 +27,7 @@ Allow for the following arguments to be supplied
 - c = lower consonants
 - C = upper consonants
 - 9 = 0-9
-- # - Special chars 
+- \# - Special chars 
 - a - lower vowels including numbers
 - A - upper vowels including numbers
 
