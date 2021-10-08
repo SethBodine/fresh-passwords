@@ -1,6 +1,30 @@
 //var template = 'Cvccvc99';
 var template = 'aCcVvCc99##99A'; // 14 Char Password
 
+//number of passwords to output (min)
+var numPasswords = 10;
+
+//Check for custom arguments
+const QueryString = window.location.search; 
+const urlParams = new URLSearchParams(QueryString); 
+
+// Validate argument n (number of passwords output)
+if (urlParams.has('n')) {
+  var tempn = Number(urlParams.get('n'));  
+  if (!isNaN(tempn)) { 
+    if ((tempn >=10) && (tempn <= 100)){
+      numPasswords = tempn;
+    }
+  }
+}
+// validate a template formatting, and ensure that we're not being asked to generate bad/invalid passwords
+if (urlParams.has('f')) {
+  var tempf = urlParams.get('f');  
+  if ((tempf.length >=12) && ((tempf.replace(/lUvVcC9WaA/g,'')).length == 0)) { 
+    template = tempf;    
+  }
+}
+
 function generatePasswords(template, number) {
     var chars = {}
     chars['l'] = 'abcdefghijklmnoprstuvwxyz';
@@ -33,7 +57,7 @@ function generatePasswords(template, number) {
 }
 
 function doPasswords() {
-  passwords = generatePasswords(template, 10);
+  passwords = generatePasswords(template, numPasswords);
 
   var passwordlist = $("ul#passwords");
   $.each(passwords, function(i, password) {
