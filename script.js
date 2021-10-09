@@ -1,3 +1,7 @@
+// Pronunceable passwords generator 
+// based on https://github.com/allixsenos/passwds-ninja-web
+// Modified by Seth Bodine (from various Forks)
+
 //var template = 'Cvccvc99';
 var template = 'aCcVvCc99##99A'; // 14 Char Password
 
@@ -24,18 +28,34 @@ if (urlParams.has('f')) {
     template = tempf;    
   }
 }
+//atoponce commit 422742e57909e8cb60cc0a27f0f1c25f5fbdfbba
+function unbiasedRandom(size) {
+  var min;
+  var rand = new Uint32Array(1);
+
+  const mycrypto = window.crypto || window.msCrypto;
+
+  size >>>= 0; // ensure `size' is a 32-bit integer
+
+  // force the range of [`min', 2**32) to be a multiple of `size'
+  min = (-size >>> 0) % size;
+
+  do { mycrypto.getRandomValues(rand); } while (rand[0] < min);
+
+  return rand[0] % size;
+}
 
 function generatePasswords(template, number) {
-    var chars = {}
-    chars['l'] = 'abcdefghijklmnoprstuvwxyz';
+    var chars = {};
+    chars['l'] = 'yyuuuoooooooiiiiiiieeeeeeeeeeeeaaaaaaaayyuuuoooooooiiiiiiieeeeeeeeeeeeaaaaaaaabbbcccccddddddddffffgggghhhhhhhhhhhhjkkllllllllmmmmnnnnnnnnnnnnppppqrrrrrrrrrrssssssssssssttttttttttttttttttvvwwwwxyyyyz';
     chars['U'] = chars['l'].toUpperCase();
-    chars['v'] = 'aeiouy';
+    chars['v'] = 'yyuuu0oooooo1iiiiii3eeeeeeeeeee4aaaaaaayyuuuoooooooiiiiiiieeeeeeeeeeeeaaaaaaaa';
     chars['V'] = chars['v'].toUpperCase();
-    chars['c'] = 'bcdfghjklmnprstvwxz';
+    chars['c'] = 'bbbcccccddddddddffffgggghhhhhhhhhhhhjkkllllllllmmmmnnnnnnnnnnnnppppqrrrrrrrrrrssssssssssssttttttttttttttttttvvwwwwxyyyyz';
     chars['C'] = chars['c'].toUpperCase();
     chars['9'] = '0123456789';
     //chars['#'] = '!@#$%^&*_-+=()[]{} ';
-    chars['#'] = '@#_- .!/'; //Tweaking Specials to be a bit less unfun for systems
+    chars['#'] = '@#______------       ..........!/'; //Tweaking Specials to be a bit less unfun for systems
     chars['a'] = chars['l'] + chars['9'];
     chars['A'] = chars['a'].toUpperCase();
 
@@ -48,7 +68,8 @@ function generatePasswords(template, number) {
         window.crypto.getRandomValues(array);
         for (c = 0; c < template.length; c++) {
             possible = chars[template.charAt(c)];
-            password += possible.charAt(Math.floor(array[c] / 256 * possible.length));
+            //password += possible.charAt(Math.floor(array[c] / 256 * possible.length));
+            password += possible.charAt(unbiasedRandom(possible.length));
         }
         passwords.push(password);
     }
@@ -63,7 +84,6 @@ function doPasswords() {
   $.each(passwords, function(i, password) {
       passwordlist.append($("<li>").text(password));
   });
-  mixpanel.track("Generated passwords");
 }
 
 doPasswords();
@@ -85,8 +105,6 @@ $('#passwords').on('click', 'li', function() {
   if (!successful) {
       prompt("Your browser does not support insta-copy. Sorry.", $(this).text());
   }
-
-  mixpanel.track("Claimed password");
 
   // Remove the selections - NOTE: Should use
   // removeRange(range) when it is supported  
